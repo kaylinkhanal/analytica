@@ -7,3 +7,8 @@ npm start
 
 #terminal 2
 python manage.py runserver
+
+
+
+admin username: test3
+password : kyalinnn
