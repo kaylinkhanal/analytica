@@ -3,13 +3,45 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from .models import User
+from .models import User,Student,Faculty,Subject,SelectedSubject,AttendanceRecord
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('id','email', 'username', 'password', 'is_student', 'is_teacher')
+
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('user', 'photo', 'DOB', 'first_sem_percentage', 'second_sem_percentage','third_sem_percentage','fourth_sem_percentage','fifth_sem_percentage','sixth_sem_percentage','seventh_sem_percentage','eighth_sem_percentage','branch')
+
+
+class FacultySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Faculty
+        fields = ('user', 'photo', 'subject_name')
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('subject_name', 'faculty')
+
+
+class SelectedSubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('subject', 'student')
+
+
+class AttendanceRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendanceRecord
+        fields = ('selected_subject', 'Date')
+
+
 
 
 class CustomRegisterSerializer(RegisterSerializer):
