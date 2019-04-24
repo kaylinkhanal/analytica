@@ -26,13 +26,13 @@ class FacultySerializer(serializers.ModelSerializer):
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Subject
         fields = ('subject_name', 'faculty')
 
 
 class SelectedSubjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = SelectedSubject
         fields = ('subject', 'student')
 
 

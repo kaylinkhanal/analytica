@@ -84,6 +84,6 @@ class SelectedSubject(models.Model):
 class AttendanceRecord(models.Model):
     selected_subject=models.ForeignKey(to=SelectedSubject,on_delete=models.CASCADE, related_name="attendance", null=True, blank=True)
     Date=models.DateField(null=True)
-    present=models.BooleanField()
+    present=models.BooleanField(null=True)
     def __str__(self):
         return "{0} - {1}".format(self.selected_subject, self.Date)
