@@ -1,8 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
-def upload_status_image(instance, filename):
-    return "status/{user}/{filename}".format(user=instance.user, filename=filename)
+
+def upload_status_image_faculty(instance, filename):
+    return "faculty_img/{user}/{filename}".format(user=instance.user, filename=filename)
+
+
+
+def upload_status_image_student(instance, filename):
+    return "student_img/{user}/{filename}".format(user=instance.user, filename=filename)
 
 class User(AbstractUser):
     is_student = models.BooleanField()
@@ -13,7 +20,7 @@ class User(AbstractUser):
 
 class Faculty(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
-    photo=models.FileField(blank=True, null=True)
+    photo       = models.ImageField(upload_to=upload_status_image_faculty, null=True, blank=True)  # Django Storages --> AWS S3
     subject_name=models.CharField(max_length=100)
     def get_absolute_url(self):
         return reverse('detail', kwargs={'slug': self.user.username})
@@ -22,7 +29,7 @@ class Faculty(models.Model):
 
 class Student(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
-    photo=models.FileField(blank=True, null=True)
+    photo       = models.ImageField(upload_to=upload_status_image_student, null=True, blank=True)  # Django Storages --> AWS S3
     DOB=models.DateField(blank=True, null=True)
     first_sem_percentage=models.FloatField(default=0)
     second_sem_percentage=models.FloatField(default=0)

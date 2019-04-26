@@ -69,6 +69,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SITE_ID = 1
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static-server', 'media-root') # '/Users/cfe/dev/restapi/'
+MEDIA_URL = '/media/'
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
