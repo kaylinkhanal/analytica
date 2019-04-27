@@ -8,11 +8,13 @@ from .serializers import UserSerializer, StudentSerializer, FacultySerializer,Su
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    lookup_field = 'username'
 
 
 class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
+    lookup_field = 'user'
 
     def put(self, request, pk=None):
         """Handles updating the object"""
@@ -28,10 +30,13 @@ class StudentViewSet(viewsets.ModelViewSet):
         return Response({'method':'delete'})
 
 
+
+
+
 class FacultyViewSet(viewsets.ModelViewSet):
     serializer_class = FacultySerializer
     queryset = Faculty.objects.all()
-
+    lookup_field = 'user'
     def put(self, request, pk=None):
         """Handles updating the object"""
         return Response({'method':'put'})

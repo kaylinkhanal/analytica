@@ -12,10 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id','email', 'username', 'password', 'is_student', 'is_teacher')
 
 
+
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('user', 'photo', 'DOB', 'first_sem_percentage', 'second_sem_percentage','third_sem_percentage','fourth_sem_percentage','fifth_sem_percentage','sixth_sem_percentage','seventh_sem_percentage','eighth_sem_percentage','branch')
+        fields = ('user',  'photo', 'DOB', 'first_sem_percentage', 'second_sem_percentage','third_sem_percentage','fourth_sem_percentage','fifth_sem_percentage','sixth_sem_percentage','seventh_sem_percentage','eighth_sem_percentage','branch')
 
 
 class FacultySerializer(serializers.ModelSerializer):
