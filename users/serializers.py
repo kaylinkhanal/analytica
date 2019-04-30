@@ -3,7 +3,7 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from .models import User,Student,Faculty,Subject,SelectedSubject,AttendanceRecord
+from .models import User,Student,Faculty,Subject,SelectedSubject,AttendanceRecord, Notice,StudentOfTheYear,FacultyOfTheYear
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,7 +16,18 @@ class UserSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('user',  'photo', 'DOB', 'first_sem_percentage', 'second_sem_percentage','third_sem_percentage','fourth_sem_percentage','fifth_sem_percentage','sixth_sem_percentage','seventh_sem_percentage','eighth_sem_percentage','branch')
+        fields = ('user','full_name',  'photo', 'DOB', 'first_sem_percentage', 'second_sem_percentage','third_sem_percentage','fourth_sem_percentage','fifth_sem_percentage','sixth_sem_percentage','seventh_sem_percentage','eighth_sem_percentage','branch')
+
+
+class StudentOfTheYearSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentOfTheYear
+        fields = ('faculty','faculty_name',  'student','student_name', 'vote')
+
+class FacultyOfTheYearSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FacultyOfTheYear
+        fields = ('student', 'student_name', 'faculty', 'faculty_name','vote')
 
 
 class FacultySerializer(serializers.ModelSerializer):
@@ -35,6 +46,12 @@ class SelectedSubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = SelectedSubject
         fields = ('subject', 'student')
+
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = ('title','faculty','noticedetails')
 
 
 class AttendanceRecordSerializer(serializers.ModelSerializer):

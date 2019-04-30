@@ -1,8 +1,17 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
-
-from .models import User, Student, Faculty,Subject,SelectedSubject,AttendanceRecord
+from .models import (
+                     User,
+                     Student,
+                     Faculty,
+                     Subject,
+                     SelectedSubject,
+                     AttendanceRecord,
+                     StudentOfTheYear,
+                     Notice,
+                     FacultyOfTheYear
+)
 
 
 class UserAdmin(BaseUserAdmin):
@@ -31,6 +40,9 @@ admin.site.register(Faculty)
 admin.site.register(Student)
 admin.site.register(Subject)
 admin.site.register(SelectedSubject)
+admin.site.register(Notice)
+admin.site.register(StudentOfTheYear)
+admin.site.register(FacultyOfTheYear)
 admin.site.register(AttendanceRecord)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)

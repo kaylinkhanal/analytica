@@ -29,6 +29,7 @@ class Faculty(models.Model):
 
 class Student(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    full_name=models.CharField(max_length=100,null=True,blank=True)
     photo       = models.ImageField(upload_to=upload_status_image_student, null=True, blank=True)  # Django Storages --> AWS S3
     DOB=models.DateField(blank=True, null=True)
     first_sem_percentage=models.FloatField(default=0)
@@ -94,3 +95,34 @@ class AttendanceRecord(models.Model):
     present=models.BooleanField(null=True)
     def __str__(self):
         return "{0} - {1}".format(self.selected_subject, self.Date)
+
+
+
+
+class Notice(models.Model):
+    title = models.CharField(max_length=50)
+    faculty=models.ForeignKey(to=Faculty,on_delete=models.CASCADE, related_name="sends", null=True, blank=True)
+    noticedetails =  models.CharField(max_length=200)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.title, self.noticedetails)
+
+
+class StudentOfTheYear(models.Model):
+    faculty=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    faculty_name=models.CharField(max_length=40,null=True,blank=True)
+    student=models.ForeignKey(to=Student, on_delete=models.CASCADE, related_name="getsvotes", null=True, blank=True)
+    student_name=models.CharField(max_length=40,null=True,blank=True)
+    vote = models.CharField(max_length=7, default='voted', editable=False)
+    def __str__(self):
+        return self.faculty.username
+
+
+class FacultyOfTheYear(models.Model):
+    student=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    student_name=models.CharField(max_length=40,null=True,blank=True)
+    faculty=models.ForeignKey(to=Faculty, on_delete=models.CASCADE, related_name="getsvotes", null=True, blank=True)
+    faculty_name=models.CharField(max_length=40,null=True,blank=True)
+    vote = models.CharField(max_length=7, default='voted', editable=False)
+    def __str__(self):
+        return self.student.username

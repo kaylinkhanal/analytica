@@ -33,7 +33,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
         data = request.data
 
         assignment = Assignment()
-        teacher = User.objects.get(username=data['teacher'])
+        teacher = data['teacher']
         assignment.teacher = teacher
         assignment.title = data['title']
         assignment.save()
