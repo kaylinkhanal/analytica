@@ -57,7 +57,7 @@ class NoticeSerializer(serializers.ModelSerializer):
 class AttendanceRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceRecord
-        fields = ('subject','subject_name','full_name', 'Date','present')
+        fields = ('subject_name','full_name', 'Date','present')
 
 
 
