@@ -10,8 +10,13 @@ from .models import (
                      AttendanceRecord,
                      StudentOfTheYear,
                      Notice,
-                     FacultyOfTheYear
+                     FacultyOfTheYear,
+                     Choice,
+                     Question,
+                     Assignment,
+                     GradedAssignment
 )
+
 
 
 class UserAdmin(BaseUserAdmin):
@@ -44,5 +49,9 @@ admin.site.register(Notice)
 admin.site.register(StudentOfTheYear)
 admin.site.register(FacultyOfTheYear)
 admin.site.register(AttendanceRecord)
+admin.site.register(Choice)
+admin.site.register(Question)
+admin.site.register(Assignment)
+admin.site.register(GradedAssignment)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
